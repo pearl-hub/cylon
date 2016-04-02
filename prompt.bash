@@ -569,7 +569,7 @@ PS1=$_Style$_Red[$_Green\\t\ $_Red'$(
   JOBS_COUNT=$(jobs | wc -l)
   [ $JOBS_COUNT -ne 0 ] && echo "$JOBS_COUNT"
   )'$_Blue'$(
-  TRASH_COUNT=$(trash -c)
+  TRASH_COUNT=$(trash -c 2> /dev/null || echo 0)
   [ $TRASH_COUNT -ne 0 ] && echo "$TRASH_COUNT"
   )'\ $_Style$_UserColor\\u$_Red@$_Style$_HostColor\\h'$(
   git branch &>/dev/null;\
