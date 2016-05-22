@@ -553,8 +553,10 @@ _Yellow="\[\033[33m\]"
 _Blue="\[\033[34m\]"
 _Magenta="\[\033[35m\]"
 
-_UserColor="\[\033[38;5;$(whoami | sum - | awk '{print $0 % 256}')m\]"
-_HostColor="\[\033[38;5;$(hostname | sum - | awk '{print $0 % 256}')m\]"
+# Use sum with pearl_attempt_command since sum in OSX might not work in the same way
+# as the GNU one.
+_UserColor="\[\033[38;5;$(whoami | pearl_attempt_command sum - | awk '{print $0 % 256}')m\]"
+_HostColor="\[\033[38;5;$(hostname | pearl_attempt_command sum - | awk '{print $0 % 256}')m\]"
 
 
 
