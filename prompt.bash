@@ -575,7 +575,9 @@ PS1=$_Style$_Red[$_Green\\t\ $_Red'$(
   )'$_Blue'$(
   TRASH_COUNT=$(trash-list | wc -l)
   [ $TRASH_COUNT -ne 0 ] && echo "$TRASH_COUNT"
-  )'\ $_Style$_UserColor\\u$_Red@$_Style$_HostColor\\h'$(
+  )'\ $_Style$_UserColor\\u$_Red@$_Style$_HostColor'$(
+    hostname | cut -c1-8
+  )$(
   git branch &>/dev/null;\
   if [ $? -eq 0 ]; then \
     echo "$(echo `git status` | grep "nothing to commit" > /dev/null 2>&1; \
