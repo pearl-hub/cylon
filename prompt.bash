@@ -576,7 +576,8 @@ PS1=$_Style$_Red[$_Green\\t\ $_Red'$(
   TRASH_COUNT=$(trash-list | wc -l)
   [ $TRASH_COUNT -ne 0 ] && echo "$TRASH_COUNT"
   )'\ $_Style$_UserColor\\u$_Red@$_Style$_HostColor'$(
-    hostname | cut -c1-8
+  HOSTNAME=$(hostname);
+  [ "${#HOSTNAME}" -ge 8 ] && echo "${HOSTNAME:0:3}..${HOSTNAME: -3}" || echo $HOSTNAME;
   )$(
   git branch &>/dev/null;\
   if [ $? -eq 0 ]; then \
