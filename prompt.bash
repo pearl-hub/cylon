@@ -558,7 +558,7 @@ _Magenta="\[\033[35m\]"
 # Use sum with osx_attempt_command since sum in OSX might not work in the same way
 # as the GNU one.
 _UserColor="\[\033[38;5;$(whoami | osx_attempt_command sum - | awk '{print $0 % 256}')m\]"
-_HostColor="\[\033[38;5;$(hostname | osx_attempt_command sum - | awk '{print $0 % 256}')m\]"
+_HostColor="\[\033[38;5;$($HOSTNAME | osx_attempt_command sum - | awk '{print $0 % 256}')m\]"
 
 
 
@@ -576,8 +576,8 @@ PS1=$_Style$_Red[$_Green\\t\ $_Red'$(
   TRASH_COUNT=$(trash-list | wc -l)
   [ $TRASH_COUNT -ne 0 ] && echo "$TRASH_COUNT"
   )'\ $_Style$_UserColor\\u$_Red@$_Style$_HostColor'$(
-  HOSTNAME=$(hostname -s);
-  [ "${#HOSTNAME}" -ge 8 ] && echo "${HOSTNAME:0:3}..${HOSTNAME: -3}" || echo $HOSTNAME;
+  HOST=$($HOSTNAME | cut -d. -f1);
+  [ "${#HOST}" -ge 8 ] && echo "${HOST:0:3}..${HOST: -3}" || echo $HOST;
   )$(
   git branch &>/dev/null;\
   if [ $? -eq 0 ]; then \
